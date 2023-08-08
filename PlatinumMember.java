@@ -32,12 +32,33 @@ public class PlatinumMember extends Member{
     }
 
     double calculateCashBack(){
-        // change!
-        return 0;
+        double cb = (entertainmentPurchases * 0.02) + (recurringPurchases * 0.01) + (transportationPurchases * 0.05);
+        return cb;
     }
 
     double calculateDues(){
-        // change!
-        return 0;
+        double cd = 150.0;
+        double newDues;
+        if (getYearsMember() > 10 && getGoodStanding() == true){
+            newDues = cd * 0.8;
+        } else{
+            newDues = cd;
+        }
+        return newDues;
+    }
+
+    public String toString(){
+        return ("\nName: " + getName() +
+        "\nAge: " + getAge() +
+        "\nYears of Membership: " + getYearsMember() +
+        "\nPhone: " + getPhone() +
+        "\nGood Standing: " + getGoodStanding() +
+        "\nMember ID: " + getMemberID() +
+        "\nMonth Joined: " + getMonthJoined() +
+        "\nYear Joined: " + getYearJoined() +
+        "\nDues: " + getDues() +
+        "\nEntertainment Purchases: " + getEntertainmentPurchases() +
+        "\nRecurring Purchases: " + getRecurringPurchases() +
+        "\nTransportation Purchases: " + getTransportationPurchases());
     }
 }

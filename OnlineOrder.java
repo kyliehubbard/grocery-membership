@@ -6,11 +6,11 @@ public class OnlineOrder {
     private int numItems;
     private ArrayList<GroceryItem> basketItems;
 
-    public OnlineOrder(Member member, double costOrder, int numItems, ArrayList<GroceryItem> basketItems){
+    public OnlineOrder(Member member, ArrayList<GroceryItem> basketItems){
         this.member = member;
-        this.costOrder = costOrder;
-        this.numItems = numItems;
-        this.basketItems = basketItems;
+        this.costOrder = totalCostBasket(basketItems);
+        this.numItems = basketItems.size();
+        this.basketItems = new ArrayList<>(basketItems);
     }
 
     public void setMember(Member m){
@@ -44,5 +44,30 @@ public class OnlineOrder {
             totalCost += item.getPrice();
         }
         return totalCost;
+    }
+
+    public void checkInventory() throws BadGrocery {
+        for (GroceryItem item : basketItems) {
+            if (item.getInventory() <= 0) {
+                throw new BadGrocery(item.getItemName() + " is out of stock.");
+            }
+        }
+    }
+
+    public String toString(){
+        return ("\nMember: " + member.getName() +
+        "\nCost of Order: " + getCostOrder() +
+        "\nNumber of Items: " + getNumItems() +
+        "\nBasket Items: \n" + getBasketItems());
+    }
+
+    public String compareTo(OnlineOrder other){
+        if (this.costOrder > other.costOrder){
+            return (this.member + " has a higher cost: " + this.costOrder);
+        } else if (this.costOrder < other.costOrder) {
+            return (other.member + " has a higher cost: " + other.costOrder);
+        } else {
+            return ("Both members have the same cost: " + this.costOrder);
+        }
     }
 }

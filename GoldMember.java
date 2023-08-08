@@ -23,10 +23,26 @@ public class GoldMember extends Member{
     }
 
     double calculateCashBack(){
-        return 0;
+        double cb = (restaurantPurchases * 0.02) + (travelPurchases * 0.05);
+        return cb;
     }
 
     double calculateDues(){
-        return 0;
+        double cd = 100.0;
+        return cd;
+    }
+
+    public String toString(){
+        return ("\nName: " + getName() +
+        "\nAge: " + getAge() +
+        "\nYears of Membership: " + getYearsMember() +
+        "\nPhone: " + getPhone() +
+        "\nGood Standing: " + getGoodStanding() +
+        "\nMember ID: " + getMemberID() +
+        "\nMonth Joined: " + getMonthJoined() +
+        "\nYear Joined: " + getYearJoined() +
+        "\nDues: " + getDues() +
+        "\nRestaurant Purchases: " + getRestaurantPurchases() +
+        "\nTravel Purchases: " + getTravelPurchases());
     }
 }

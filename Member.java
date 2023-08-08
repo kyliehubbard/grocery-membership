@@ -28,8 +28,12 @@ abstract class Member {
     public String getName(){
         return name;
     }
-    public void setAge(int a){
-        this.age = a;
+    public void setAge(int a) throws BadMember{
+        if (age >= 18){
+            this.age = a;
+        } else{
+            throw new BadMember("Age must be 18 or above.");
+        }
     }
     public int getAge(){
         return age;
@@ -58,14 +62,23 @@ abstract class Member {
     public int getMemberID(){
         return memberID;
     }
-    public void setMonthJoined(int mj){
-        this.monthJoined = mj;
+    public void setMonthJoined(int mj) throws BadMember{
+        if (monthJoined >= 12 && monthJoined <= 24){
+            this.monthJoined = mj;
+        } else {
+            throw new BadMember("Month joined must be between 12-24.");
+        }
+    
     }
     public int getMonthJoined(){
         return monthJoined;
     }
-    public void setYearJoined(int yj){
-        this.yearJoined = yj;
+    public void setYearJoined(int yj) throws BadMember{
+        if (yearJoined >= 2013){
+            this.yearJoined = yj;
+        } else {
+            throw new BadMember("Year joined must be equal to or greater than 2013.");
+        }
     }
     public int getYearJoined(){
         return yearJoined;
@@ -79,4 +92,28 @@ abstract class Member {
 
     abstract double calculateCashBack();
     abstract double calculateDues();
+
+    public String toString(){
+        return ("\nName: " + getName() +
+        "\nAge: " + getAge() +
+        "\nYears of Membership: " + getYearsMember() +
+        "\nPhone: " + getPhone() +
+        "\nGood Standing: " + getGoodStanding() +
+        "\nMember ID: " + getMemberID() +
+        "\nMonth Joined: " + getMonthJoined() +
+        "\nYear Joined: " + getYearJoined() +
+        "\nDues: " + getDues());
+    }
+
+    public String compareTo(Member other){
+        if (this.yearJoined > other.yearJoined){
+            return (other.name + " has been a member for more years: Joined " + other.yearJoined);
+        } else if (this.yearJoined < other.yearJoined) {
+            return (this.name + " has been a member for more years: Joined " + this.yearJoined);
+        } else{
+            return ("Both members joined in the same year.");
+        }
+    }
 }
+
+
